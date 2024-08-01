@@ -44,7 +44,13 @@ class StudyService:
             for tag_name in study_update.tags:
                 tag = self.tag_repository.create_tag(db, tag_name)
                 self.study_repository.add_tag_to_study(db, study.id, tag.id)
-        return study
+        return {
+            "subject": study.subject,
+            "notes": study.notes,
+            "user_id": study.user_id,
+            "id":  study.id,
+            "tags": study_update.tags,
+        }
 
     def delete_study(self, db: Session, study_id: int) -> Optional[Study]:
         return self.study_repository.delete_study(db, study_id)

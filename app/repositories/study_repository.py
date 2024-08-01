@@ -57,7 +57,6 @@ class StudyRepository:
     def update_study(self, db: Session, study_id: int, study_update: StudyUpdate) -> Optional[Study]:
         db_study = db.query(Study).filter(Study.id == study_id).first()
         if db_study:
-            db_study.topic = study_update.topic
             db_study.subject = study_update.subject
             db_study.notes = study_update.notes
             db.commit()
